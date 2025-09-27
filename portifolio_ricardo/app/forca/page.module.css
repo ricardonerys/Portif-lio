@@ -1,0 +1,118 @@
+.container {
+  min-height: 100vh;
+  background: #8c0606;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forca { margin: 2rem 0; }
+
+/* Estrutura da forca */
+.gallows {
+  position: relative;
+  width: 120px;
+  height: 200px;
+  margin: 0 auto 1rem;
+}
+.pole {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 10px; height: 200px;
+  background: #fff;
+}
+.beam {
+  position: absolute;
+  top: 0; left: 0;
+  width: 80px; height: 10px;
+  background: #fff;
+}
+.rope {
+  position: absolute;
+  top: 10px; left: 70px;
+  width: 2px; height: 30px;
+  background: #fff;
+}
+
+/* Boneco */
+.head {
+  position: absolute;
+  top: 40px; left: 55px;
+  width: 30px; height: 30px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+.body {
+  position: absolute;
+  top: 70px; left: 69px;
+  width: 2px; height: 50px;
+  background: #fff;
+}
+.armLeft, .armRight, .legLeft, .legRight {
+  position: absolute;
+  background: #fff;
+  height: 2px;
+  width: 30px;
+}
+.armLeft { top: 90px; left: 40px; transform: rotate(-30deg); }
+.armRight{ top: 90px; left: 69px; transform: rotate(30deg); }
+.legLeft { top: 120px; left: 40px; transform: rotate(30deg); }
+.legRight{ top: 120px; left: 69px; transform: rotate(-30deg); }
+
+.palavra {
+  display: flex;
+  gap: 1rem;
+  font-size: 2.5rem;
+  margin: 2rem 0;
+}
+.letra {
+  border-bottom: 2px solid #fff;
+  width: 2rem;
+  text-align: center;
+}
+
+.inputArea {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.inputArea input {
+  width: 50px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.inputArea button {
+  background: #0070f3;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.inputArea button:hover {
+  background: #0059c1;
+}
+
+.letrasPainel {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+.letrasPainel h3 { margin-bottom: 0.5rem; }
+
+.msg { font-size: 1.3rem; margin: 2rem 0; }
+
+.botao {
+  background: #0070f3;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.botao:hover { background: #0059c1; }
