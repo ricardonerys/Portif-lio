@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "portmbl",
+    "slug": "portmbl",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/foto.jpeg",
+    "scheme": "portmbl",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/foto.jpeg",
+        "backgroundImage": "./assets/images/foto.jpeg",
+        "monochromeImage": "./assets/images/foto.jpeg"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.ricknery.portmbl"
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/foto.jpeg"
+    },
+    "plugins": [
+      "expo-router",
+        [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/foto.jpeg",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4b0a6d56-d194-4f90-b734-281782c54769"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4b0a6d56-d194-4f90-b734-281782c54769"
+    }
+  }
+}
