@@ -41,11 +41,45 @@ export default function Forca() {
 
 	return (
 		<ScrollView contentContainerStyle={styles.container}>
+			<View style={styles.titleSpace} />
+			
 			<Text style={styles.title}>Jogo da Forca</Text>
 			<Text style={styles.subtitle}>games</Text>
 
-			<View style={styles.forcaBox}>
-				<Text style={styles.info}>Tentativas restantes: {Math.max(0, maxErros - erros)}</Text>
+			<View style={styles.forcaContainer}>
+				<View style={styles.hangman}>
+					{/* Base da forca */}
+					<View style={styles.base} />
+					
+					{/* Poste vertical */}
+					<View style={styles.pole} />
+					
+					{/* Barra horizontal */}
+					<View style={styles.beam} />
+					
+					{/* Corda */}
+					{erros > 0 && <View style={styles.rope} />}
+					
+					{/* Cabeça */}
+					{erros > 0 && <View style={styles.head} />}
+					
+					{/* Corpo */}
+					{erros > 1 && <View style={styles.body} />}
+					
+					{/* Braço esquerdo */}
+					{erros > 2 && <View style={styles.armLeft} />}
+					
+					{/* Braço direito */}
+					{erros > 3 && <View style={styles.armRight} />}
+					
+					{/* Perna esquerda */}
+					{erros > 4 && <View style={styles.legLeft} />}
+					
+					{/* Perna direita */}
+					{erros > 5 && <View style={styles.legRight} />}
+				</View>
+				
+				<Text style={styles.info}>Erros: {erros}/{maxErros}</Text>
 			</View>
 
 			<View style={styles.palavra}>
@@ -103,81 +137,154 @@ export default function Forca() {
 const styles = StyleSheet.create({
 	container: {
 		padding: 16,
-		alignItems: 'center'
+		alignItems: 'center',
+		backgroundColor: '#1e3c72',
+		minHeight: '100%'
+	},
+	titleSpace: {
+		height: 40
 	},
 	title: {
-		fontSize: 22,
-		fontWeight: '700'
+		fontSize: 24,
+		fontWeight: '700',
+		marginBottom: 4,
+		color: '#fff'
 	},
 	subtitle: {
 		fontSize: 14,
-		color: '#666',
-		marginBottom: 8
+		color: '#b0c4de',
+		marginBottom: 16
 	},
-	forcaBox: {
-		marginVertical: 8,
-		alignItems: 'center'
+	forcaContainer: {
+		alignItems: 'center',
+		marginVertical: 16,
+		position: 'relative'
+	},
+	hangman: {
+		width: 160,
+		height: 180,
+		position: 'relative',
+		marginBottom: 12,
+		borderColor: '#fff',
+		borderWidth: 2,
+		borderRadius: 8,
+		backgroundColor: '#e8f0f7'
+	},
+	base: {
+		position: 'absolute',
+		left: 10,
+		bottom: 10,
+		width: 100,
+		height: 6,
+		backgroundColor: '#333',
+		borderRadius: 3
+	},
+	pole: {
+		position: 'absolute',
+		left: 20,
+		top: 10,
+		width: 6,
+		height: 140,
+		backgroundColor: '#333',
+		borderRadius: 3
+	},
+	beam: {
+		position: 'absolute',
+		left: 20,
+		top: 10,
+		width: 90,
+		height: 6,
+		backgroundColor: '#333',
+		borderRadius: 3
+	},
+	rope: {
+		position: 'absolute',
+		left: 106,
+		top: 16,
+		width: 2,
+		height: 30,
+		backgroundColor: '#666'
+	},
+	head: {
+		position: 'absolute',
+		left: 95,
+		top: 46,
+		width: 24,
+		height: 24,
+		borderRadius: 12,
+		borderWidth: 2,
+		borderColor: '#333'
+	},
+	body: {
+		position: 'absolute',
+		left: 105,
+		top: 70,
+		width: 4,
+		height: 30,
+		backgroundColor: '#333',
+		borderRadius: 2
+	},
+	armLeft: {
+		position: 'absolute',
+		left: 85,
+		top: 80,
+		width: 20,
+		height: 4,
+		backgroundColor: '#333',
+		borderRadius: 2
+	},
+	armRight: {
+		position: 'absolute',
+		left: 109,
+		top: 80,
+		width: 20,
+		height: 4,
+		backgroundColor: '#333',
+		borderRadius: 2
+	},
+	legLeft: {
+		position: 'absolute',
+		left: 100,
+		top: 100,
+		width: 4,
+		height: 24,
+		backgroundColor: '#333',
+		borderRadius: 2
+	},
+	legRight: {
+		position: 'absolute',
+		left: 110,
+		top: 100,
+		width: 4,
+		height: 24,
+		backgroundColor: '#333',
+		borderRadius: 2
 	},
 	info: {
-		fontSize: 16
+		fontSize: 16,
+		fontWeight: '600',
+		color: '#fff'
 	},
 	palavra: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		justifyContent: 'center',
-		marginVertical: 12
+		marginVertical: 12,
+		backgroundColor: 'rgba(255,255,255,0.1)',
+		paddingVertical: 12,
+		paddingHorizontal: 8,
+		borderRadius: 8
 	},
 	letra: {
-		fontSize: 24,
-		marginHorizontal: 6
-	},
-	inputArea: {
-		flexDirection: 'row',
-		alignItems: 'center'
-	},
-	input: {
-		borderWidth: 1,
-		borderColor: '#ccc',
-		padding: 8,
-		width: 60,
-		textAlign: 'center',
-		marginRight: 8,
-		borderRadius: 6
-	},
-	button: {
-		backgroundColor: '#2575fc',
-		paddingHorizontal: 12,
-		paddingVertical: 10,
-		borderRadius: 6
-	},
-	buttonText: {
+		fontSize: 28,
+		marginHorizontal: 6,
 		color: '#fff',
 		fontWeight: '600'
 	},
-	painelLetras: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		width: '100%',
-		marginTop: 12
-	},
-	painelCol: {
-		flex: 1,
-		alignItems: 'center'
-	},
-	painelTitle: {
-		fontWeight: '700'
-	},
-	painelContent: {
-		marginTop: 4
-	},
-	msg: {
-		marginTop: 12,
-		fontSize: 16
-	}
-,
 	keyboardHint: {
-		marginVertical: 8,
-		color: '#333'
+		marginVertical: 12,
+		color: '#b0c4de',
+		fontSize: 14
 	},
 	keyboard: {
 		flexDirection: 'row',
@@ -191,17 +298,74 @@ const styles = StyleSheet.create({
 		height: 44,
 		margin: 4,
 		borderRadius: 6,
-		backgroundColor: '#f0f0f0',
+		backgroundColor: '#00d9ff',
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		shadowColor: '#000',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.3,
+		shadowRadius: 3
 	},
 	keyDisabled: {
-		backgroundColor: '#cfcfcf'
+		backgroundColor: '#4a5f7f'
 	},
 	keyText: {
-		fontWeight: '700'
+		fontWeight: '700',
+		color: '#1e3c72',
+		fontSize: 14
 	},
 	keyTextDisabled: {
-		color: '#777'
+		color: '#b0c4de'
+	},
+	painelLetras: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		width: '100%',
+		marginTop: 16,
+		gap: 12
+	},
+	painelCol: {
+		flex: 1,
+		alignItems: 'center',
+		backgroundColor: 'rgba(255,255,255,0.1)',
+		paddingVertical: 12,
+		paddingHorizontal: 8,
+		borderRadius: 8
+	},
+	painelTitle: {
+		fontWeight: '700',
+		color: '#fff',
+		fontSize: 14
+	},
+	painelContent: {
+		marginTop: 6,
+		color: '#b0c4de',
+		fontSize: 12
+	},
+	msg: {
+		marginTop: 16,
+		fontSize: 16,
+		color: '#00d9ff',
+		fontWeight: '600',
+		backgroundColor: 'rgba(0,217,255,0.1)',
+		paddingVertical: 12,
+		paddingHorizontal: 16,
+		borderRadius: 8,
+		textAlign: 'center'
+	},
+	button: {
+		backgroundColor: '#00d9ff',
+		paddingHorizontal: 24,
+		paddingVertical: 12,
+		borderRadius: 8,
+		shadowColor: '#000',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.3,
+		shadowRadius: 3
+	},
+	buttonText: {
+		color: '#1e3c72',
+		fontWeight: '700',
+		fontSize: 16
 	}
 });
