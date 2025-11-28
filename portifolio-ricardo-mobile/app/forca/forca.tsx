@@ -11,7 +11,6 @@ export default function Forca() {
 	const [palavra, setPalavra] = useState('');
 	const [letrasTentadas, setLetrasTentadas] = useState<string[]>([]);
 	const [erros, setErros] = useState(0);
-	const [inputLetra, setInputLetra] = useState('');
 
 	useEffect(() => {
 		novoJogo();
@@ -22,18 +21,16 @@ export default function Forca() {
 		setPalavra(palavras[rand].toLowerCase());
 		setLetrasTentadas([]);
 		setErros(0);
-		setInputLetra('');
 	}
 
-	function enviarLetra() {
-		const letra = inputLetra.toLowerCase().trim();
-		if (!letra || letra.length !== 1 || !/[a-z]/.test(letra)) return;
+	function tentarLetra(letra: string) {
+		const l = letra.toLowerCase();
+		if (!l || l.length !== 1 || !/[a-z]/.test(l)) return;
 
-		if (!letrasTentadas.includes(letra)) {
-			setLetrasTentadas((prev) => [...prev, letra]);
-			if (!palavra.includes(letra)) setErros((prev) => prev + 1);
+		if (!letrasTentadas.includes(l)) {
+			setLetrasTentadas((prev) => [...prev, l]);
+			if (!palavra.includes(l)) setErros((prev) => prev + 1);
 		}
-		setInputLetra('');
 	}
 
 	const venceu = palavra && palavra.split('').every((l) => letrasTentadas.includes(l));
@@ -60,20 +57,24 @@ export default function Forca() {
 			</View>
 
 			{!venceu && !perdeu && (
-				<View style={styles.inputArea}>
-					<TextInput
-						style={styles.input}
-						maxLength={1}
-						value={inputLetra}
-						onChangeText={setInputLetra}
-						onSubmitEditing={enviarLetra}
-						autoCapitalize="none"
-						autoCorrect={false}
-					/>
-					<TouchableOpacity style={styles.button} onPress={enviarLetra}>
-						<Text style={styles.buttonText}>Enviar</Text>
-					</TouchableOpacity>
-				</View>
+				<>
+					<Text style={styles.keyboardHint}>Toque nas letras abaixo</Text>
+					<View style={styles.keyboard}>
+						{'abcdefghijklmnopqrstuvwxyz'.split('').map((ch) => {
+							const disabled = letrasTentadas.includes(ch);
+							return (
+								<TouchableOpacity
+									key={ch}
+									onPress={() => tentarLetra(ch)}
+									disabled={disabled}
+									style={[styles.key, disabled && styles.keyDisabled]}
+								>
+									<Text style={[styles.keyText, disabled && styles.keyTextDisabled]}>{ch.toUpperCase()}</Text>
+								</TouchableOpacity>
+							);
+						})}
+					</View>
+				</>
 			)}
 
 			<View style={styles.painelLetras}>
@@ -172,5 +173,35 @@ const styles = StyleSheet.create({
 	msg: {
 		marginTop: 12,
 		fontSize: 16
+	}
+,
+	keyboardHint: {
+		marginVertical: 8,
+		color: '#333'
+	},
+	keyboard: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
+		marginVertical: 6,
+		width: '100%'
+	},
+	key: {
+		width: 36,
+		height: 44,
+		margin: 4,
+		borderRadius: 6,
+		backgroundColor: '#f0f0f0',
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	keyDisabled: {
+		backgroundColor: '#cfcfcf'
+	},
+	keyText: {
+		fontWeight: '700'
+	},
+	keyTextDisabled: {
+		color: '#777'
 	}
 });
